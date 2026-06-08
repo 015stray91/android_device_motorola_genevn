@@ -1,0 +1,33 @@
+name: OrangeFox Recovery Compiler
+
+on:
+  workflow_dispatch: # Allows manual trigger from the Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04 # Modern runner environment for Node.js 24
+    steps:
+    - name: Checkout Workspace Assets
+      uses: actions/checkout@v5 # Upgraded for modern runtime
+
+    - name: Cleanup Runner Storage Space
+      run: |
+        sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc "/usr/local/share/boost"
+
+    - name: Execute Android Recovery Compilation
+      uses: CaptainThrowback/Action-Recovery-Builder@main
+      env:
+        MANIFEST: "https://gitlab.com -b 12.1"
+        DEVICE: "yume"
+        DT_LINK: "https://github.com -b OrangeFox_12.1"
+        TARGET: "recoveryimage"
+        OUTPUT: "recovery.img"
+
+    - name: Upload Downloadable Recovery Image Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: OrangeFox-PitchBlack-Hybrid-yume
+        path: |
+          fox_hybrid_12.1/out/target/product/yume/recovery.img
+          fox_hybrid_12.1/out/target/product/yume/OrangeFox-*.zip
+        if-no-files-found: warn
