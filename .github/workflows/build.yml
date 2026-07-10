@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04 # Modern runner environment for Node.js 24
+    runs-on: ubuntu-22.04 # Modern runner environment for Node.js 24
     steps:
     - name: Checkout Workspace Assets
       uses: actions/checkout@v5 # Upgraded for modern runtime
@@ -18,7 +18,7 @@ jobs:
       uses: CaptainThrowback/Action-Recovery-Builder@main
       env:
         MANIFEST: "https://gitlab.com -b 12.1"
-        DEVICE: "yume"
+        DEVICE: "genven"
         DT_LINK: "https://github.com -b OrangeFox_12.1"
         TARGET: "recoveryimage"
         OUTPUT: "recovery.img"
@@ -26,8 +26,8 @@ jobs:
     - name: Upload Downloadable Recovery Image Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: OrangeFox-PitchBlack-Hybrid-yume
+        name: OrangeFox-
         path: |
-          fox_hybrid_12.1/out/target/product/yume/recovery.img
-          fox_hybrid_12.1/out/target/product/yume/OrangeFox-*.zip
+          fox_hybrid_12.1/out/target/product/genevn/recovery.img
+          fox_hybrid_12.1/out/target/product/genevn/OrangeFox-*.zip
         if-no-files-found: warn
