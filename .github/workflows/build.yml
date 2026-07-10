@@ -5,10 +5,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04 # Modern runner environment for Node.js 24
+    runs-on: ubuntu-22.04 # Correct environment for Android 12 build tools and Node 24
     steps:
     - name: Checkout Workspace Assets
-      uses: actions/checkout@v5 # Upgraded for modern runtime
+      uses: actions/checkout@v5 # Upgraded to use Node 24 runtime natively
 
     - name: Cleanup Runner Storage Space
       run: |
@@ -18,16 +18,21 @@ jobs:
       uses: CaptainThrowback/Action-Recovery-Builder@main
       env:
         MANIFEST: "https://gitlab.com -b 12.1"
-        DEVICE: "genven"
+        DEVICE: "genevn"
+        # Restored the short placeholder so the wrapper handles path generation
         DT_LINK: "https://github.com -b OrangeFox_12.1"
         TARGET: "recoveryimage"
         OUTPUT: "recovery.img"
+        # Force KernelSU Next Support and Wipe Out Magisk v25 Menus
+        FOX_ENABLE_KERNELSU_NEXT_SUPPORT: "1"
+        OF_DISABLE_MAGISK_ADDON: "1"
 
     - name: Upload Downloadable Recovery Image Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6 # Upgraded to modern v6 for true Node 24 handling
       with:
-        name: OrangeFox-
+        name: BlackFox-Hybrid-genevn
         path: |
-          fox_hybrid_12.1/out/target/product/genevn/recovery.img
-          fox_hybrid_12.1/out/target/product/genevn/OrangeFox-*.zip
+          workspace/out/target/product/genevn/recovery.img
+          workspace/out/target/product/genevn/OrangeFox-*.zip
         if-no-files-found: warn
+        
