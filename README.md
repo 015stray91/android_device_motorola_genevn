@@ -5,6 +5,6 @@ add device trees
 
 
 . build/envsetup.sh
-lunch twrp_yume-eng && m -j$(nproc --all) recoveryimage
+lunch twrp_genevn-eng && m -j$(nproc --all) recoveryimage
 ```
 
