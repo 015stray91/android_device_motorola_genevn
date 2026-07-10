@@ -30,7 +30,7 @@ jobs:
     - name: Upload Downloadable Recovery Image Artifact
       uses: actions/upload-artifact@v6 # Upgraded to modern v6 for true Node 24 handling
       with:
-        name: BlackFox-Hybrid-genevn
+        name: orangefox-genevn
         path: |
           workspace/out/target/product/genevn/recovery.img
           workspace/out/target/product/genevn/OrangeFox-*.zip
